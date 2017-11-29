@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using log4net;
 using StockingSelector.Utility;
 
 namespace StockingSelector.ViewModel
@@ -9,6 +10,15 @@ namespace StockingSelector.ViewModel
   /// </summary>
   public abstract class BaseWindowViewModel : PropertyChangeNotifier
   {
+    #region Fields
+
+    /// <summary>
+    /// The logger used for events within this class
+    /// </summary>
+    private static readonly ILog Logger = LoggingUtilities.ResolveLogger();
+
+    #endregion
+
     #region Properties
 
     /// <summary>
@@ -67,6 +77,8 @@ namespace StockingSelector.ViewModel
     {
       WindowWidth = width;
       WindowHeight = height;
+
+      // @Log
 
       NotifyPropertiesChanged(nameof(WindowWidth), nameof(WindowHeight));
     }

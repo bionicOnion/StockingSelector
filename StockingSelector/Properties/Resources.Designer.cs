@@ -59,5 +59,15 @@ namespace StockingSelector.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] gmail_client_secret {
+            get {
+                object obj = ResourceManager.GetObject("gmail_client_secret", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

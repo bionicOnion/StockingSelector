@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
+using log4net;
 
 namespace StockingSelector.Utility
 {
@@ -13,6 +14,15 @@ namespace StockingSelector.Utility
   /// </summary>
   public class PropertyChangeNotifier : INotifyPropertyChanged
   {
+    #region Fields
+
+    /// <summary>
+    /// The logger used for events within this class
+    /// </summary>
+    private static readonly ILog Logger = LoggingUtilities.ResolveLogger();
+
+    #endregion
+
     #region Events
 
     /// <inheritdoc />

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using log4net;
+using StockingSelector.Utility;
 
 namespace StockingSelector.Model
 {
@@ -9,6 +11,15 @@ namespace StockingSelector.Model
   /// </summary>
   public static class AssignmentEngine
   {
+    #region Fields
+
+    /// <summary>
+    /// The logger used for events within this class
+    /// </summary>
+    private static readonly ILog Logger = LoggingUtilities.ResolveLogger();
+
+    #endregion
+
     #region Public Functions
 
     /// <summary>
@@ -22,6 +33,8 @@ namespace StockingSelector.Model
     {
       try
       {
+        // @Log
+
         // @Document
         var rng = new Random();
         var shuffledParticipants = participants.OrderBy(participant => rng.Next()).ToArray();
@@ -31,6 +44,8 @@ namespace StockingSelector.Model
         for (var i = 0; i < shuffledParticipants.Length; ++i)
           assignmentsArray[i] = (shuffledParticipants[i], shuffledParticipants[(i + 1) % shuffledParticipants.Length]);
 
+        // @Log
+
         // @Document
         assignments = assignmentsArray;
         return new HashSet<Participant>(assignmentsArray.Select(assignment => assignment.Giver)).SetEquals(participants)
@@ -38,8 +53,8 @@ namespace StockingSelector.Model
       }
       catch (Exception ex)
       {
-        // @Unimplemented Add logging here
-        Console.WriteLine(ex);
+        if (Logger.IsErrorEnabled)
+          Logger.Error("Exception occurred during assignment generation", ex);
 
         assignments = null;
         return false;

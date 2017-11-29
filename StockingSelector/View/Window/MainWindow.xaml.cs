@@ -1,14 +1,14 @@
 ﻿namespace StockingSelector.View.Window
 {
   /// <summary>
-  /// Interaction logic for StockingSelectorWindow.xaml
+  /// Interaction logic for MainWindow.xaml
   /// </summary>
-  public partial class StockingSelectorWindow : System.Windows.Window
+  public partial class MainWindow : System.Windows.Window
   {
     /// <summary>
     /// @Document
     /// </summary>
-    public StockingSelectorWindow()
+    public MainWindow()
     {
       InitializeComponent();
     }
