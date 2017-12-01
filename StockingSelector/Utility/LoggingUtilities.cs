@@ -107,7 +107,7 @@ namespace StockingSelector.Utility
         // @Document
         _logger = ResolveLogger();
         if (_logger.IsInfoEnabled)
-          _logger.Info($"STARTING APPLICATION: {App.Name} [v{App.Version}] @ {DateTime.Now.TimeOfDay:g}");
+          _logger.InfoFormat("STARTING APPLICATION: {0} [v{1}] @ {2:g}", App.Name, App.Version, DateTime.Now.TimeOfDay);
 
         return true;
       }
@@ -144,7 +144,7 @@ namespace StockingSelector.Utility
       try
       {
         if (_logger.IsInfoEnabled)
-          _logger.Info($"ENDING APPLICATION: {App.Name} [v{App.Version}] @ {DateTime.Now.TimeOfDay:g}\n");
+          _logger.InfoFormat("ENDING APPLICATION: {0} [v{1}] @ {2:g}\n", App.Name, App.Version, DateTime.Now.TimeOfDay);
 
         LogManager.Shutdown();
         return true;

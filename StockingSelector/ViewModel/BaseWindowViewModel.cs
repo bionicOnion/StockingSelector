@@ -30,13 +30,13 @@ namespace StockingSelector.ViewModel
     /// <summary>
     /// @Document
     /// </summary>
-    public uint WindowWidth { get; set; }
+    public uint WindowWidth { get; set; } = 800u;
 
 
     /// <summary>
     /// @Document
     /// </summary>
-    public uint WindowHeight { get; set; }
+    public uint WindowHeight { get; set; } = 600u;
 
 
     /// <summary>

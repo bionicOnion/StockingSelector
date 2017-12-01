@@ -1,12 +1,12 @@
-﻿<Window x:Class="StockingSelector.View.Window.MainWindow"
+﻿<Window x:Class="StockingSelector.View.Windows.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:StockingSelector.ViewModel"
+        xmlns:ctrl="clr-namespace:StockingSelector.View.Controls"
         WindowStartupLocation="CenterScreen" SizeToContent="Manual" Title="{Binding WindowTitle}"
         Width="{Binding WindowWidth, Mode=TwoWay}" Height="{Binding WindowHeight, Mode=TwoWay}"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600">
-  <DockPanel>
-    
-  </DockPanel>
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600" d:DataContext="{d:DesignInstance vm:MainViewModel}">
+  <ctrl:MainPanel Margin="10" />
 </Window>

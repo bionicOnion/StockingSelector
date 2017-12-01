@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace StockingSelector.Model
 {
   /// <summary>
-  /// @Document
+  /// Struct containing information about a participant included in the stocking matching
   /// </summary>
   [StructLayout(LayoutKind.Auto)]
   public struct Participant
@@ -12,13 +12,13 @@ namespace StockingSelector.Model
     #region Properties
 
     /// <summary>
-    /// @Document
+    /// The name of the participant
     /// </summary>
     public string Name { get; }
 
 
     /// <summary>
-    /// @Document
+    /// The email address to send information about a participant's assignment to
     /// </summary>
     public MailAddress EmailAddress { get; }
 
@@ -27,10 +27,10 @@ namespace StockingSelector.Model
     #region Ctor
 
     /// <summary>
-    /// @Document
+    /// Create a new participant with the given name and email address
     /// </summary>
-    /// <param name="name"></param>
-    /// <param name="email"></param>
+    /// <param name="name">The name of the participant</param>
+    /// <param name="email">An email address at which the participant can be reached</param>
     public Participant(string name, string email)
     {
       Name = name;
@@ -39,15 +39,25 @@ namespace StockingSelector.Model
 
 
     /// <summary>
-    /// @Document
+    /// Create a new participant with the given name and email address
     /// </summary>
-    /// <param name="name"></param>
-    /// <param name="email"></param>
+    /// <param name="name">The name of the participant</param>
+    /// <param name="email">An email address at which the participant can be reached</param>
     public Participant(string name, MailAddress email)
     {
       Name = name;
       EmailAddress = email;
     }
+
+    #endregion
+
+    #region Public Functions
+
+    /// <summary>
+    /// @Document
+    /// </summary>
+    /// <returns></returns>
+    public override string ToString() => $"{Name} ({EmailAddress})";
 
     #endregion
   }
