@@ -61,12 +61,28 @@ namespace StockingSelector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to &lt;!DOCTYPE HTML&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        ///  &lt;title&gt;Stocking Assignment: {0} has {1}&lt;/title&gt;
+        ///
+        ///  &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html;&quot; /&gt;
+        ///  &lt;meta charset=&quot;UTF-8;&quot; /&gt;
+        ///  &lt;meta name=&quot;author&quot; content=&quot;Robert Miller&quot;&gt;
+        ///  &lt;meta name=&quot;application-name&quot; content=&quot;Stocking Selector&quot;&gt;
+        ///  &lt;style type=&quot;text/css&quot;&gt;
+        ///    @import url(&apos;https://fonts.googleapis.com/css?family=Lato|Open+Sans&apos;);
+        ///
+        ///    a { color: #3BBECE; }
+        ///
+        ///    body {
+        ///      background-color: #EFEFEF;
+        ///      color: #606060;
+        ///      font-family: &apos;Open  [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] gmail_client_secret {
+        internal static string EmailTemplate {
             get {
-                object obj = ResourceManager.GetObject("gmail_client_secret", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("EmailTemplate", resourceCulture);
             }
         }
     }

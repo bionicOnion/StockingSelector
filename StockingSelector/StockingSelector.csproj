@@ -121,6 +121,7 @@
     <Compile Include="Model\AssignmentEngine.cs" />
     <Compile Include="Model\AssignmentMailer.cs" />
     <Compile Include="Model\Participant.cs" />
+    <Content Include="Resources\EmailTemplate.html" />
     <Compile Include="Utility\ResultCode.cs" />
     <Compile Include="Utility\LoggingUtilities.cs" />
     <Compile Include="Utility\PropertyChangeNotifier.cs" />
@@ -158,9 +159,6 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\gmail_client_secret.json" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
