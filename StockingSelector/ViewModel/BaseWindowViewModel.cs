@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using log4net;
+using log4net.Util;
 using StockingSelector.Utility;
 
 namespace StockingSelector.ViewModel
@@ -77,8 +78,9 @@ namespace StockingSelector.ViewModel
     {
       WindowWidth = width;
       WindowHeight = height;
-
-      // @Log
+      
+      if (Logger.IsInfoEnabled)
+        Logger.InfoFormat("Setting dimensions of window '{0}' to {1:N0}x{2:N0}", WindowTitle, WindowWidth, WindowHeight);
 
       NotifyPropertiesChanged(nameof(WindowWidth), nameof(WindowHeight));
     }

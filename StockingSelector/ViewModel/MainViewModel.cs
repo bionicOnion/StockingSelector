@@ -67,6 +67,12 @@ namespace StockingSelector.ViewModel
     /// </summary>
     public string NewParticipantEmailAddress { get; set; }
 
+
+    /// <summary>
+    /// @Document
+    /// </summary>
+    public string NewParticipantWishlistAddress { get; set; }
+
     #endregion
 
     #region Commands
@@ -98,8 +104,7 @@ namespace StockingSelector.ViewModel
     /// </summary>
     public MainViewModel()
     {
-      // @Improvement Pass these as parameters, load window state from WindowPositionSettings
-      SetWindowDimensions(1.3333f, 0.3333f);
+      SetWindowDimensions(2f, 0.5f);
 
       _mailer = new AssignmentMailer();
     }
@@ -157,26 +162,31 @@ namespace StockingSelector.ViewModel
     private void OnAddParticipantCommand()
     {
       // If the name or email address hasn't been specified, there's nothing to do
-      if (string.IsNullOrWhiteSpace(NewParticipantName) || string.IsNullOrWhiteSpace(NewParticipantEmailAddress))
+      if (string.IsNullOrWhiteSpace(NewParticipantName)
+       || string.IsNullOrWhiteSpace(NewParticipantEmailAddress)
+       || string.IsNullOrWhiteSpace(NewParticipantWishlistAddress))
       {
         if (Logger.IsDebugEnabled)
-          Logger.DebugFormat("Skipping addition of participant with missing data: Name={0}; Email={1}",
+          Logger.DebugFormat("Skipping addition of participant with missing data: Name={0}; Email={1}; WishlistAddr={2}",
             NewParticipantName == string.Empty ? "<EMPTY>" : NewParticipantName ?? "<NULL>",
-            NewParticipantEmailAddress == string.Empty ? "<EMPTY>" : NewParticipantEmailAddress ?? "<NULL>");
+            NewParticipantEmailAddress == string.Empty ? "<EMPTY>" : NewParticipantEmailAddress ?? "<NULL>",
+            NewParticipantWishlistAddress == string.Empty ? "<EMPTY>" : NewParticipantWishlistAddress ?? "<NULL>");
         return;
       }
 
       // @Document
-      var participant = new Participant(NewParticipantName, NewParticipantEmailAddress);
+      var participant = new Participant(NewParticipantName, NewParticipantEmailAddress, NewParticipantWishlistAddress);
       Participants.Add(participant);
       if (Logger.IsDebugEnabled)
-        Logger.DebugFormat("Adding participant {0} (email address {1}) to collection; {2:N0} participants configured",
-          participant.Name, participant.EmailAddress, Participants.Count);
+        Logger.DebugFormat("Adding participant {0} (email address {1}, wishlist address {2}) to collection; {3:N0} participants configured",
+          participant.Name, participant.EmailAddress, participant.WishlistAddress, Participants.Count);
 
       // @Document
       NewParticipantName = string.Empty;
       NewParticipantEmailAddress = string.Empty;
-      NotifyPropertiesChanged(nameof(NewParticipantName), nameof(NewParticipantEmailAddress));
+      NewParticipantWishlistAddress = string.Empty;
+      NotifyPropertiesChanged(nameof(NewParticipantName), nameof(NewParticipantEmailAddress),
+        nameof(NewParticipantWishlistAddress));
     }
 
 
@@ -196,10 +206,6 @@ namespace StockingSelector.ViewModel
       {
         if (Logger.IsWarnEnabled)
           Logger.WarnFormat("Failed to remove participant {0} from collection", participant);
-      }
-      else
-      {
-        // @Unimplemented Notify about the removal
       }
     }
 

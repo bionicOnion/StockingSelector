@@ -11,6 +11,8 @@
       <TextBox DockPanel.Dock="Left" Margin="2,2,2,0" Width="75" HorizontalAlignment="Right" VerticalAlignment="Center" Text="{Binding NewParticipantName}" />
       <Label DockPanel.Dock="Left" Margin="2,2,2,0" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Email:" />
       <TextBox DockPanel.Dock="Left" Margin="2,2,2,0" Width="200" HorizontalAlignment="Right" VerticalAlignment="Center" Text="{Binding NewParticipantEmailAddress}" />
+      <Label DockPanel.Dock="Left" Margin="2,2,2,0" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Wishlist Address:" />
+      <TextBox DockPanel.Dock="Left" Margin="2,2,2,0" Width="200" HorizontalAlignment="Right" VerticalAlignment="Center" Text="{Binding NewParticipantWishlistAddress}" />
       <Button DockPanel.Dock="Left" Margin="2,2,2,0" Width="100" Content="Add Participant" Command="{Binding AddParticipantCommand}" />
       <Button DockPanel.Dock="Right" Margin="2,2,0,0" Width="150" Content="Generate Assignments" Command="{Binding GenerateAssignmentsCommand}" />
     </DockPanel>

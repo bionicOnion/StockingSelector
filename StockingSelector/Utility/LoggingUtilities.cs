@@ -98,11 +98,11 @@ namespace StockingSelector.Utility
         // @Document
         GlobalContext.Properties[ApplicationNameKey] = cleanedAppName;
         GlobalContext.Properties[LogNameKey] = $"{cleanedAppName}_{DateTime.Today:yyyyMMdd}.log";
-        GlobalContext.Properties[LogLocationKey] = Path.Combine(Path.GetPathRoot(Environment.SystemDirectory), "Log"); // @Improvement Make this user-settable
-        GlobalContext.Properties[LogBackupCountKey] = 5; // @Improvement Make this user-settable
+        GlobalContext.Properties[LogLocationKey] = Path.Combine(Path.GetPathRoot(Environment.SystemDirectory), "Log");
+        GlobalContext.Properties[LogBackupCountKey] = 5;
 
         // @Document
-        XmlConfigurator.Configure(); // @Improvement Move the log4net configs into a separate file
+        XmlConfigurator.Configure();
 
         // @Document
         _logger = ResolveLogger();

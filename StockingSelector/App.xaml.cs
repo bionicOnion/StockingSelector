@@ -46,6 +46,12 @@ namespace StockingSelector
     /// </summary>
     public static Version Version { get; } = Assembly.GetExecutingAssembly().GetName().Version;
 
+
+    /// <summary>
+    /// The version number of the currently-executing application
+    /// </summary>
+    public static string Identifier { get; } = $"{Name} [v{Version}]";
+
     #endregion
 
     #region Protected Functions

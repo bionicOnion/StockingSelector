@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Security;
 using System.Threading;
 using log4net;
+using StockingSelector.Properties;
 using StockingSelector.Utility;
 
 namespace StockingSelector.Model
@@ -92,7 +94,8 @@ namespace StockingSelector.Model
       {
         if (_initialized)
         {
-          // @Unimplemented figure out how to handle this case best
+          if (Logger.IsWarnEnabled)
+            Logger.Warn("Attempting to re-initialized an initialized object");
           return true;
         }
 
@@ -148,6 +151,8 @@ namespace StockingSelector.Model
         if (Logger.IsInfoEnabled)
           Logger.Info("Starting to send email notifications to participants");
 
+        var participants = assignments.Select(a => a.Giver).ToArray();
+
         // @Document
         foreach (var assignment in assignments)
         {
@@ -156,7 +161,8 @@ namespace StockingSelector.Model
             try
             {
               email.Subject = $"Stocking Assignment for {assignment.Giver.Name}";
-              email.Body = GenerateEmailBody(assignment);
+              email.Body = GenerateEmailBody(assignment, participants);
+              email.IsBodyHtml = true;
               
               if (Logger.IsInfoEnabled)
                 Logger.InfoFormat("Sending email to participant {0}...", assignment.Giver);
@@ -214,11 +220,18 @@ namespace StockingSelector.Model
     /// @Document
     /// </summary>
     /// <param name="assignment"></param>
+    /// <param name="participants"></param>
     /// <returns></returns>
-    private string GenerateEmailBody((Participant Giver, Participant Recipient) assignment)
+    private static string GenerateEmailBody((Participant Giver, Participant Recipient) assignment,
+      IReadOnlyCollection<Participant> participants)
     {
-      // @Improvement Do this for real and all fancy and stuff
-      return $"{assignment.Giver.Name} has been assigned {assignment.Recipient.Name} as their stocking recipient";
+      var participantList = string.Join("\n", participants
+        .Where(participant => !participant.Equals(assignment.Giver) && !participant.Equals(assignment.Recipient))
+        .OrderBy(participant => participant.Name)
+        .Select(p => $"<li><a href=\"{p.WishlistAddress}\">{p.Name}</a></li>"));
+
+      return string.Format(Resources.EmailTemplate, assignment.Giver.Name, assignment.Recipient.Name,
+        assignment.Recipient.WishlistAddress, participants.Count, participantList, App.Identifier);
     }
 
     #endregion

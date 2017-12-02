@@ -45,8 +45,8 @@ namespace StockingSelector.Utility
       }
       catch (Exception ex)
       {
-        // @Unimplemented add logging capabilities
-        Console.WriteLine(ex);
+        if (Logger.IsErrorEnabled)
+          Logger.Error($"An exception occurred while notifying about the property {propertyName}", ex);
         return false;
       }
     }
@@ -97,7 +97,8 @@ namespace StockingSelector.Utility
       }
       catch (Exception ex)
       {
-        // @Unimplemented add logging capabilities
+        if (Logger.IsErrorEnabled)
+          Logger.Error($"An exception occurred while notifying about all properties", ex);
         Console.WriteLine(ex);
         return false;
       }
