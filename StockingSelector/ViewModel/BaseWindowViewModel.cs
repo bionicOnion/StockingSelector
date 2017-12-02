@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using log4net;
-using log4net.Util;
 using StockingSelector.Utility;
 
 namespace StockingSelector.ViewModel
@@ -23,31 +22,31 @@ namespace StockingSelector.ViewModel
     #region Properties
 
     /// <summary>
-    /// @Document
+    /// The title of the window to display on the UI
     /// </summary>
     public abstract string WindowTitle { get; }
 
 
     /// <summary>
-    /// @Document
+    /// The width dimension of the window
     /// </summary>
     public uint WindowWidth { get; set; } = 800u;
 
 
     /// <summary>
-    /// @Document
+    /// The height dimension of the window
     /// </summary>
     public uint WindowHeight { get; set; } = 600u;
 
 
     /// <summary>
-    /// @Document
+    /// The X position of the window on the desktop
     /// </summary>
     public uint WindowXPosition { get; set; }
 
 
     /// <summary>
-    /// @Document
+    /// The Y position of the window on the desktop
     /// </summary>
     public uint WindowYPosition { get; set; }
 
@@ -56,10 +55,11 @@ namespace StockingSelector.ViewModel
     #region Public Functions
 
     /// <summary>
-    /// @Document
+    /// Set the dimenstions of the window as a combination of aspect ratio (width over height) and a screen space ratio
+    /// (the amount of horizontal space that the window should take up on the desktop)
     /// </summary>
-    /// <param name="aspectRatio"></param>
-    /// <param name="screenSpaceRatio"></param>
+    /// <param name="aspectRatio">The desired aspect ratio of the window (width over height)</param>
+    /// <param name="screenSpaceRatio">The desired ratio between the window's width and the size of the desktop</param>
     public void SetWindowDimensions(float aspectRatio, float screenSpaceRatio)
     {
       var targetWidth = Convert.ToUInt32(SystemParameters.PrimaryScreenWidth * screenSpaceRatio);
@@ -70,10 +70,10 @@ namespace StockingSelector.ViewModel
 
 
     /// <summary>
-    /// @Document
+    /// Set the size of the window
     /// </summary>
-    /// <param name="width"></param>
-    /// <param name="height"></param>
+    /// <param name="width">The desired width of the window (in pixels)</param>
+    /// <param name="height">The desired height of the window (in pixels)</param>
     public void SetWindowDimensions(uint width, uint height)
     {
       WindowWidth = width;

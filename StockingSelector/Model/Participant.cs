@@ -90,7 +90,7 @@ namespace StockingSelector.Model
     /// @Document
     /// </summary>
     /// <returns></returns>
-    public override string ToString() => $"{Name} ({EmailAddress})";
+    public override string ToString() => $"{Name} ({EmailAddress}; {WishlistAddress})";
 
     #endregion
   }

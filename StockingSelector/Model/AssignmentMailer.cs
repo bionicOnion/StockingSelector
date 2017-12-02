@@ -156,7 +156,7 @@ namespace StockingSelector.Model
         // @Document
         foreach (var assignment in assignments)
         {
-          using (var email = new MailMessage(_senderAddress, assignment.Recipient.EmailAddress))
+          using (var email = new MailMessage(_senderAddress, assignment.Giver.EmailAddress))
           {
             try
             {

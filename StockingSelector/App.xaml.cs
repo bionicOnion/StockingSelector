@@ -27,7 +27,7 @@ namespace StockingSelector
 
 
     /// <summary>
-    /// @Document
+    /// The viewmodel backing the main window of the application
     /// </summary>
     private MainViewModel _viewModel;
 
@@ -77,7 +77,10 @@ namespace StockingSelector
       
       try
       {
-        // @Document
+        // Log the user in. Because the login prompt is the first window displayed by the application, it's incorrectly
+        // interpreted to be the main window, meaning that the default behavior of the application will be to exit when
+        // the window closes. Since this isn't the desired behavior here, the shutdown mode is temporarily changed for
+        // the duration of time that the login window is open.
         Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
         var loginViewModel = new LoginViewModel();
         new LoginWindow { DataContext = loginViewModel }.ShowDialog();
@@ -93,7 +96,7 @@ namespace StockingSelector
         if (Logger.IsInfoEnabled)
           Logger.InfoFormat("Logging in user with username {0}", loginViewModel.Username);
 
-        // @Document
+        // Create and initialize the main viewmodel of the application, establishing a connection to the SMTP server
         _viewModel = new MainViewModel();
         if (!_viewModel.Initialize(new MailAddress(loginViewModel.Username), loginViewModel.Password))
         {
@@ -102,8 +105,7 @@ namespace StockingSelector
           DoShutdown(ResultCode.LifecycleFailure);
           return;
         }
-
-        // @Document
+        
         var mainWindow = new MainWindow
         {
           DataContext = _viewModel,
@@ -126,7 +128,6 @@ namespace StockingSelector
     /// <param name="args">Arguments providing additional information about the closing of the application</param>
     protected override void OnExit(ExitEventArgs args)
     {
-      // @Document
       _viewModel?.Dispose();
       _viewModel = null;
 
